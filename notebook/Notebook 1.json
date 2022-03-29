@@ -17,18 +17,15 @@
 				"spark.dynamicAllocation.enabled": "true",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "1",
-				"spark.autotune.trackingId": "bcaae381-7662-4a35-b495-e9056b6dcc7a"
+				"spark.autotune.trackingId": "89f797e8-8a77-4f31-891d-49be9b13880a"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
 			"kernelspec": {
-				"name": "synapse_spark",
-				"display_name": "Synapse Spark"
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
 			},
 			"language_info": {
 				"name": "scala"
@@ -46,7 +43,7 @@
 				"nodeCount": 10,
 				"cores": 4,
 				"memory": 28,
-				"extraHeader": null
+				"automaticScaleJobs": true
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -56,7 +53,6 @@
 				"source": [
 					"spark"
 				],
-				"attachments": null,
 				"execution_count": 1
 			},
 			{
@@ -75,7 +71,6 @@
 				"source": [
 					"val df = spark.read.option(\"header\",\"true\").csv(\"abfss://data@adedevcanada.dfs.core.windows.net/movies.csv\")"
 				],
-				"attachments": null,
 				"execution_count": 2
 			},
 			{
@@ -95,8 +90,25 @@
 					"import com.microsoft.spark.sqlanalytics.utils.Constants\r\n",
 					"import org.apache.spark.sql.SqlAnalyticsConnector._"
 				],
-				"attachments": null,
 				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df.write.sqlanalytics(\"SQLPool.dbo.table1\", Constants.INTERNAL)"
+				],
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -114,7 +126,6 @@
 				"source": [
 					""
 				],
-				"attachments": null,
 				"execution_count": null
 			}
 		]
